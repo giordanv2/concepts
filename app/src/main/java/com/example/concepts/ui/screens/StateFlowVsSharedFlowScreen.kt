@@ -111,6 +111,7 @@ class StateFlowVsSharedFlowViewModel : ViewModel() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StateFlowVsSharedFlowScreen(
+    onBack: (() -> Unit)? = null,
     viewModel: StateFlowVsSharedFlowViewModel = viewModel()
 ) {
     val screenState by viewModel.screenState.collectAsStateWithLifecycle()
@@ -225,6 +226,12 @@ fun StateFlowVsSharedFlowScreen(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+            if (onBack != null) {
+                Button(onClick = onBack) {
+                    Text("Back")
+                }
+            }
+
             Text(
                 text = "StateFlow vs SharedFlow",
                 style = MaterialTheme.typography.headlineMedium,
@@ -392,44 +399,6 @@ private fun DemoCard(
 @Composable
 private fun StateFlowVsSharedFlowScreenPreview() {
     ConceptsTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                Text(
-                    text = "StateFlow vs SharedFlow",
-                    style = MaterialTheme.typography.headlineMedium,
-                    fontWeight = FontWeight.Bold
-                )
-                Text("Preview of the concept screen.")
-                StateSummaryCard(
-                    tapCount = 2,
-                    lastAction = "Preview state",
-                    onIncrement = {}
-                )
-                DemoCard(
-                    title = "Wrong: event stored in StateFlow",
-                    description = "This demo replays the last event.",
-                    accentLabel = "Replays on restart",
-                    accentColor = MaterialTheme.colorScheme.errorContainer,
-                    onTrigger = {},
-                    secondaryActionLabel = "Clear wrong event",
-                    onSecondaryAction = {}
-                )
-                DemoCard(
-                    title = "Right: event emitted with SharedFlow",
-                    description = "This demo emits one-time events and restores the visible snackbar only for the remaining time after rotation.",
-                    accentLabel = "One-time event",
-                    accentColor = MaterialTheme.colorScheme.primaryContainer,
-                    onTrigger = {},
-                    secondaryActionLabel = null,
-                    onSecondaryAction = null
-                )
-            }
-        }
+        StateFlowVsSharedFlowScreen(onBack = {})
     }
 }
