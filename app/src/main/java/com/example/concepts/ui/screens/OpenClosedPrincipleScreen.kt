@@ -106,7 +106,7 @@ class ProductNetworkDataSource {
     }
 }
 
-class ProductDao {0
+class ProductDao {
     private var cachedProducts: List<Product> = emptyList()
 
     suspend fun getProducts(): List<Product> {
