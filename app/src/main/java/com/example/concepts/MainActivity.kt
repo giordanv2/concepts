@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import com.example.concepts.ui.screens.ConceptsHomeScreen
 import com.example.concepts.ui.screens.DependencyInversionScreen
 import com.example.concepts.ui.screens.OpenClosedPrincipleScreen
+import com.example.concepts.ui.screens.RecompositionScreen
 import com.example.concepts.ui.theme.ConceptsTheme
 import com.example.concepts.ui.screens.StateFlowVsSharedFlowScreen
 
@@ -19,7 +20,8 @@ private enum class ConceptDestination {
     Home,
     StateFlowVsSharedFlow,
     DependencyInversion,
-    OpenClosedPrinciple
+    OpenClosedPrinciple,
+    Recomposition
 }
 
 class MainActivity : ComponentActivity() {
@@ -48,6 +50,9 @@ private fun ConceptsApp() {
             },
             onOpenOpenClosedPrinciple = {
                 currentDestination = ConceptDestination.OpenClosedPrinciple
+            },
+            onOpenRecomposition = {
+                currentDestination = ConceptDestination.Recomposition
             }
         )
 
@@ -60,6 +65,10 @@ private fun ConceptsApp() {
         )
 
         ConceptDestination.OpenClosedPrinciple -> OpenClosedPrincipleScreen(
+            onBack = { currentDestination = ConceptDestination.Home }
+        )
+
+        ConceptDestination.Recomposition -> RecompositionScreen(
             onBack = { currentDestination = ConceptDestination.Home }
         )
     }

@@ -22,7 +22,8 @@ import com.example.concepts.ui.theme.ConceptsTheme
 fun ConceptsHomeScreen(
     onOpenStateFlowVsSharedFlow: () -> Unit,
     onOpenDependencyInversion: () -> Unit,
-    onOpenOpenClosedPrinciple: () -> Unit
+    onOpenOpenClosedPrinciple: () -> Unit,
+    onOpenRecomposition: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -60,6 +61,13 @@ fun ConceptsHomeScreen(
             description = "Same checkout example, but focused on being open for extension and closed for modification.",
             buttonLabel = "Open concept",
             onClick = onOpenOpenClosedPrinciple
+        )
+
+        ConceptEntryCard(
+            title = "Recomposition",
+            description = "Interactive Compose example showing state-driven recomposition, plus good, bad, and fixed code.",
+            buttonLabel = "Open concept",
+            onClick = onOpenRecomposition
         )
     }
 }
@@ -101,7 +109,8 @@ private fun ConceptsHomeScreenPreview() {
         ConceptsHomeScreen(
             onOpenStateFlowVsSharedFlow = {},
             onOpenDependencyInversion = {},
-            onOpenOpenClosedPrinciple = {}
+            onOpenOpenClosedPrinciple = {},
+            onOpenRecomposition = {}
         )
     }
 }
